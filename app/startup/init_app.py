@@ -1,28 +1,8 @@
-from flask_mail import Mail
 from flask.ext.security import Security, SQLAlchemyUserDatastore
 from flask.ext.social import Social, SQLAlchemyConnectionDatastore
 from logging.handlers import SMTPHandler
 
 import logging
-
-def init_app(app, db, extra_config_settings={}):
-    app.config.from_object('app.startup.settings')
-    app.config.update(extra_config_settings)
-    
-    mail = Mail(app)
-
-    init_error_logger_with_email_handler(app)
-
-    from app.startup import assets
-    
-    #views
-    from app.admin import views
-    from app.articles import views
-    from app.contact import views
-    from app.pages import views
-
-    return app
-
 
 def init_error_logger_with_email_handler(app):
     """
