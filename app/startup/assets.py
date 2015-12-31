@@ -7,6 +7,7 @@ js_libs = Bundle("js/jquery.min.js",
                 "js/moment.js",
                 "js/select2.min.js",
                 "js/daterangepicker.js",
+                "js/lightbox.js",
                  filters="jsmin",
                  output="js/libs.js")
 
@@ -23,6 +24,7 @@ css_libs = Bundle("css/bootstrap.css",
                   "css/font-awesome.css",
                   "css/select2.css",
                   "css/daterangepicker.css",
+                  "css/lightbox.css",
                   filters="less",
                   output="css/libs.css")
 
