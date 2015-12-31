@@ -1,0 +1,19 @@
+{% macro render_article_header(article) %}
+  <div class="article">
+    <h3 class="title"><a href="{{url_for('articles.post', slug=article.slug) }}">{{article.title}}</a></h3>
+    {% if article.subtitle %}
+      <h5>{{article.subtitle}}</h5>
+    {% endif %}
+    <h6>Posted: {{ article.published_date.strftime('%B, %d %Y') }} at {{article.published_date.strftime('%I %p').strip('0')}}</h6>
+  </div>
+{% endmacro %}
+
+{% macro render_article_before_break(article) %}
+  {% if article.should_break %}
+    {{article.before_the_break()|safe}}
+    
+    <div class="article-footer"><h6><a href="{{url_for('articles.post', slug=article.slug) }}" style="font-weight:900">Read more</a></h6></div>
+  {% else %}
+    {{ article.content|safe }}
+  {% endif %}
+{% endmacro %}

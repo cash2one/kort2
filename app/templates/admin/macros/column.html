@@ -1,0 +1,17 @@
+{% macro render_slug(model, column) %}
+    <a target="_blank" href="{{url_for('articles.post', slug=model.slug)}}">{{ model.slug }}</a>
+{% endmacro %}
+
+{% macro render_visibility(model, column) %}
+  <div class="label 
+  {% if model.visibility == "Published" %}
+    label-success
+  {% elif model.visibility == "Hidden" %}
+    label-danger
+  {% elif model.visibility == "Visible" %}
+    label-info
+  {% else %}
+    label-warning
+  {% endif %}
+  ">{{model.visibility}}</div>
+{% endmacro %}

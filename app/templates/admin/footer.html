@@ -1,0 +1,9 @@
+<footer class="footer ">
+  <div class="container">
+    {% if user %}
+      <p>You are logged in as: {{ user }}</p>
+    {% else %}
+      <p>You aren't logged in</p>
+    {% endif %}
+  </div>
+</footer>

@@ -1,0 +1,9 @@
+{% from "articles/macros/article.html" import render_article_header, render_article_before_break %}
+
+{% extends "base_templates/base.html" %}
+{% block main %}
+
+{{ render_article_header(article) }}
+{{ article.content|safe }}
+
+{% endblock %}

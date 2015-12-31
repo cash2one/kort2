@@ -1,0 +1,9 @@
+{% extends "base_templates/base.html" %}
+  {% block main %}
+    <p>Hi! Do me a quick favor and verify that you aren't a robot. I promise you'll only have to do it once</p>
+    <form method="POST" action="{{url_for('robot')}}">
+      {{ form.hidden_tag() }}
+      {{ form.redirect }}
+      {{ form.recaptcha }}
+  </form>
+{% endblock %}

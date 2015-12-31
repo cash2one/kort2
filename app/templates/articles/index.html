@@ -1,0 +1,13 @@
+{% from "articles/macros/article.html" import render_article_header, render_article_before_break %}
+{% from "articles/macros/pagination.html" import render_pagination %}
+
+{% extends "base_templates/base.html" %}
+  {% block main %}
+
+  {% for article in articles.items %}
+    {{ render_article_header(article) }}
+    {{ render_article_before_break(article) }}
+  {% endfor %}
+  <hr>
+  {{ render_pagination(articles) }}
+{% endblock %}

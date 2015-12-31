@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include "base_templates/head.html" %}
+        {% assets "css_libs" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+        {% endassets %}
+        {% assets "css_main" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+        {% endassets %}
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+        <title>
+            {% if title %}
+                {{title}}
+            {% else %}
+                Nick Kortendick
+            {% endif %}
+        </title>
+    </head>
+    <body>
+        <div class="footer-wrapper">
+            {% include "base_templates/navbar.html" %}
+            {% include "base_templates/flashed_messages.html" -%}
+
+            <div class="container main">
+                {% block main %}{% endblock -%}
+                {% assets "js_libs" %}
+                <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+                {% endassets %}
+                {% assets "js_main" %}
+                <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+                {% endassets %}
+            </div>
+            <div class="push"></div>
+        </div>
+        {% include "base_templates/footer.html" %}
+    <body>
+
+</html>
