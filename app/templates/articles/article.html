@@ -4,6 +4,8 @@
 {% block main %}
 
 {{ render_article_header(article) }}
-{{ article.content|safe }}
+<div class="article">
+  {{ article.content|safe }}
+</div>
 
 {% endblock %}

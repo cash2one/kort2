@@ -9,6 +9,7 @@
 {% endmacro %}
 
 {% macro render_article_before_break(article) %}
+  <div class="article">
   {% if article.should_break %}
     {{article.before_the_break()|safe}}
     
@@ -16,4 +17,5 @@
   {% else %}
     {{ article.content|safe }}
   {% endif %}
+  </div>
 {% endmacro %}
