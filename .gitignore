@@ -67,3 +67,5 @@ target/
 .DS_STORE
 app/startup/settings.py
 app/static/.webassets-cache
+app/static/css/admin.css
+app/static/css/libs.css
