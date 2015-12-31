@@ -22,4 +22,4 @@ def is404(e):
 
 @app.errorhandler(500)
 def is500(e):
-  return str(e)#render_template('base_templates/error.html', e = e)
+  return render_template('base_templates/error.html', e = e)

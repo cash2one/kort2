@@ -9,5 +9,6 @@ def contact():
   form = ContactForm()
   if form.validate_on_submit():
     flash("Your email has been passed along!", "success")
+    app.logger.error(form.message.data)
     return redirect(url_for('index'))
   return render_template('pages/contact.html', form = form)

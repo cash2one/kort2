@@ -29,7 +29,6 @@ def init_error_logger_with_email_handler(app):
     Initialize a logger to send emails on error-level messages.
     Unhandled exceptions will now send an email message to app.config.ADMINS.
     """
-    return
     if app.debug: return                        # Do not send error emails while developing
 
     # Retrieve email settings from app.config
