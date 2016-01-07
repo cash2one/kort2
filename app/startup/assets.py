@@ -40,6 +40,10 @@ css_admin = Bundle("css/main.less",
                   output="css/admin.css"
                   )
 
+css_dashboard = Bundle("css/dashboard.less",
+                      filters="less",
+                      output="css/dashboard.css")
+
 webassets.manifest = 'cache' if not app.config['DEBUG'] else False
 webassets.cache = not app.config['DEBUG']
 webassets.debug = "merge" if app.config['DEBUG'] == True else False
@@ -52,3 +56,5 @@ webassets.register('css_main', css_main)
 
 webassets.register('js_admin', js_admin)
 webassets.register('css_admin', css_admin)
+
+webassets.register('css_dashboard', css_dashboard)

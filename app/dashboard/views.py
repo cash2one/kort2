@@ -2,6 +2,7 @@ from app.app_and_db import app
 from flask import Blueprint, jsonify, render_template
 
 import datetime
+import random
 import requests
 
 dashboard = Blueprint('dashboard', __name__)
@@ -14,14 +15,14 @@ wunderground_endpoint = wunderground_endpoint.format(app.config['WUNDERGROUND_AP
 
 @dashboard.route('/')
 def index():
-  return render_template('pages/dashboard.html', time=datetime.datetime.now().time().strftime('%I:%M').lstrip('0'))
+  time=datetime.datetime.now().time().strftime('%I:%M').lstrip('0')
+  return render_template('pages/dashboard.html', image_number=random.randrange(1, 9), time=time)
 
 #Query no more than once a minute
 @dashboard.route('/bus')
 def bus_schedule():
   params = {'key' : app.config['CUMTD_API_KEY'],
             'stop_id' : 'GRN4TH',
-            'route_id' : 'GREEN;GREENHOPPER',
             'count' : '5'}
   response = requests.get(cumtd_endpoint, params=params)
   json = response.json()
