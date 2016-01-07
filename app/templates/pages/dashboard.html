@@ -120,10 +120,11 @@
     night = ["b1-2", "b1-4", "b2-3", "b2-4", "b3-1", "b4-2", "b5-3", "b6-2", "b6-4", "b7-2", "b7-3", "b10-4", "b9-2", "b10-2", "b8-1"];
 
     var item;
-    if(true) {
-      item = day[Math.floor(Math.random() * day.length)];
-    } else {
+    var now = new Date();
+    if(now.getHours() > 18 || now.getHours() < 7) {
       item = night[Math.floor(Math.random() * night.length)];
+    } else {
+      item = day[Math.floor(Math.random() * day.length)];
     }
     $("#video").fadeTo(1000 , 0, function () {
       $("#video-source").attr('src', base + item + ".mov");
