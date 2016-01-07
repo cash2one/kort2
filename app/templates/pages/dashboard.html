@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include "base_templates/head.html" %}
+    {% assets "css_libs" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+    {% assets "css_dashboard" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+
+    {% if image_number %}
+      <style>
+        .background {
+          background-image: url("//files.nickkortendick.com/img/backgrounds/{{ image_number }}.jpg");
+        }
+      </style>
+    {% endif %}
+    <title>Dashboard</title>
+
+  </head>
+
+  <body>
+    <div class=background>
+      <video autoplay preload=auto poster="http://a1.phobos.apple.com/us/r1000/000/Features/atv/AutumnResources/videos/b1-4.mov" loop>
+        <source src="http://a1.phobos.apple.com/us/r1000/000/Features/atv/AutumnResources/videos/b4-3.mov"
+      </video>
+    </div>
+    <div class=widgets>
+
+      <div class=top-left>
+        <div class=bus-wrapper>
+          <i class="fa fa-bus"></i>
+          <span class=bus-minutes></span>
+        </div>
+        <span class=bus-label>minutes for 5E</span>
+      </div>
+
+      <div class=top-right>
+        <div class=weather-wrapper>
+          <img class=weather-icon-now>
+          <span class=weather></span>
+          <span class=degree>°</span>
+        </div>
+        <span class=weather-label>in Champaign</span>
+
+        <div class=weather-wrapper style="padding-top: 25px;">
+          <img class=weather-icon-future>
+          <span class=weather-future></span>
+          <span class=degree>°</span>
+        </div>
+        <span class=weather-label id="weather-future-time"></span>
+      </div>
+
+      <div class=center>
+        <div id="time">{{ time }}</div>
+      </div>
+    </div>
+  </body>
+  
+  {% assets "js_libs" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+  
+  {% assets "js_main" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+
+  <script>
+  function updateClock() {
+    var now = new Date();
+    hours = (now.getHours() % 12);
+    minutes = now.getMinutes();
+    if(minutes < 10) {
+      minutes = '0' + minutes;
+    }
+    document.getElementById('time').innerHTML = hours + ":" + minutes;
+    setTimeout(updateClock, 1000);
+  }
+  updateClock();
+
+  function updateBus() {
+    $.ajax({
+      url: "/dashboard/bus"
+    }).done(function(response) {
+      bus0 = response['departures'][0]['expected_mins'];
+      bus1 = response['departures'][1]['expected_mins'];
+      $('.bus-minutes').text(bus0 + " and " + bus1);
+      setTimeout(updateBus, 60000);
+    });
+  }
+  updateBus();
+
+  function updateWeather() {
+    $.ajax({
+      url: "/dashboard/weather"
+    }).done(function(response) {
+      now = response['hourly_forecast'][0];
+      $('.weather').text(now['temp']['english']);
+      $(".weather-icon-now").attr('src', now['icon_url']);
+
+      future = response['hourly_forecast'][3]
+      $(".weather-future").text(future['temp']['english']);
+      $(".weather-icon-future").attr('src', future['icon_url']);
+      $("#weather-future-time").text("at " + future["FCTTIME"]["civil"])
+      setTimeout(updateWeather, 180000);
+    });
+  }
+  updateWeather();
+  </script>
+</html>
