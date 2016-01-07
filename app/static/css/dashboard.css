@@ -78,6 +78,5 @@ body,
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  background: url(bkg.jpg) no-repeat;
   background-size: cover;
 }
