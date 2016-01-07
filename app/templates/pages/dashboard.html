@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include "base_templates/head.html" %}
+        {% assets "css_libs" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+        {% endassets %}
+        {% assets "css_dashboard" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+        {% endassets %}
+        <title>Dashboard</title>
+    </head>
+    <body>
+      {{ time }}
+    </body>
+</html>
