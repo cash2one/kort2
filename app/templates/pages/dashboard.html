@@ -8,22 +8,14 @@
     {% assets "css_dashboard" %}
     <link rel="stylesheet" href="{{ ASSET_URL }}">
     {% endassets %}
-
-    {% if image_number %}
-      <style>
-        .background {
-          background-image: url("//files.nickkortendick.com/img/backgrounds/{{ image_number }}.jpg");
-        }
-      </style>
-    {% endif %}
     <title>Dashboard</title>
 
   </head>
 
   <body>
     <div class=background>
-      <video autoplay preload=auto poster="http://a1.phobos.apple.com/us/r1000/000/Features/atv/AutumnResources/videos/b1-4.mov" loop>
-        <source src="http://a1.phobos.apple.com/us/r1000/000/Features/atv/AutumnResources/videos/b4-3.mov"
+      <video id=video autoplay preload=auto poster="http://a1.phobos.apple.com/us/r1000/000/Features/atv/AutumnResources/videos/b1-4.mov" loop>
+        <source id=video-source src="http://a1.phobos.apple.com/us/r1000/000/Features/atv/AutumnResources/videos/b4-3.mov"
       </video>
     </div>
     <div class=widgets>
@@ -83,9 +75,20 @@
     $.ajax({
       url: "/dashboard/bus"
     }).done(function(response) {
-      bus0 = response['departures'][0]['expected_mins'];
-      bus1 = response['departures'][1]['expected_mins'];
-      $('.bus-minutes').text(bus0 + " and " + bus1);
+      var bus0;
+      if(response['departures'].length > 0) {
+        bus0 = response['departures'][0]['expected_mins'];
+      } else {
+        bus0 = "No busses"
+      }
+      var bus1; 
+      if(response['departures'].length > 1) {
+        bus1 = response['departures'][1]['expected_mins'];
+        bus1 = " and " + bus1;
+      } else {
+        bus1 = "";
+      }
+      $('.bus-minutes').text(bus0 + bus1);
       setTimeout(updateBus, 60000);
     });
   }
@@ -107,5 +110,29 @@
     });
   }
   updateWeather();
+
+  document.getElementById('video').addEventListener('ended',chooseVideo, false);
+
+  function chooseVideo() {
+    base = "http://a1.phobos.apple.com/us/r1000/000/Features/atv/AutumnResources/videos/";
+
+    day = ["b1-1", "b1-3", "b2-1", "b2-2", "b3-2", "b3-3", "b4-1", "b4-3", "b5-1", "b5-2", "b6-1", "b6-3", "b7-1", "b7-2", "b8-2", "b8-3", "b9-1", "b9-3", "b10-1", "b10-2", "b10-3"];
+    night = ["b1-2", "b1-4", "b2-3", "b2-4", "b3-1", "b4-2", "b5-3", "b6-2", "b6-4", "b7-2", "b7-3", "b10-4", "b9-2", "b10-2", "b8-1"];
+
+    var item;
+    if(true) {
+      item = day[Math.floor(Math.random() * day.length)];
+    } else {
+      item = night[Math.floor(Math.random() * night.length)];
+    }
+    $("#video").fadeTo(1000 , 0, function () {
+      $("#video-source").attr('src', base + item + ".mov");
+      video = $('#video')[0];
+      video.currentTime = 0;
+      video.load();
+      $("#video").fadeTo(5000 , 1);
+    });
+  }
+  chooseVideo();
   </script>
 </html>
