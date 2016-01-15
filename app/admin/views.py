@@ -1,11 +1,13 @@
 from app.app_and_db import app
 from flask import jsonify, render_template, request
 from flask.ext import admin
+from flask_security.decorators import roles_accepted
 from werkzeug import secure_filename
 
 import os
 
 @app.route('/admin/upload', methods=('GET', 'POST'))
+@roles_accepted('admin')
 def admin():
   file = request.files['upload']
   if file:
