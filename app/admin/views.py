@@ -5,10 +5,6 @@ from werkzeug import secure_filename
 
 import os
 
-@admin.expose('/')
-def admin(self):
-  return render_template('admin/index.html')
-
 @app.route('/admin/upload', methods=('GET', 'POST'))
 def admin():
   file = request.files['upload']

@@ -17,6 +17,9 @@
       <ul class="nav navbar-nav">
         {{ menu(admin_view) }}
       </ul>
+      <ul class="nav navbar navbar-nav navbar-right">
+        <li><a href="#">Hello, {{ current_user.first_name }}!</a></li>
+      </ul>
     </div>
   </div>
 </nav>

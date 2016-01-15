@@ -19,18 +19,26 @@
         <li><a href="{{url_for('resume')}}">Resume</a></li>
         <li><a href="{{url_for('contact')}}">Contact</a></li>
         <li><a href="{{url_for('articles.index')}}">Articles</a></li>
-<!--         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li> -->
+      </ul>
+      <ul class="nav navbar navbar-nav navbar-right">
+        {% if current_user.is_authenticated %}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, {{ current_user.first_name }}!<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              {% if current_user.has_role('Admin') %}
+                <li><a href="{{url_for('admin.index')}}">Admin</a></li>
+              {% endif %}
+            </ul>
+          </li>
+        {% else %}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">You are not logged in<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{url_for('security.login')}}">Login</a></li>
+              <li><a href="{{url_for('security.register')}}">Register</a></li>
+            </ul>
+          </li>
+          {% endif %}
       </ul>
     </div>
   </div>

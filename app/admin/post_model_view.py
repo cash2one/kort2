@@ -1,6 +1,6 @@
+from app.admin.auth_view import AuthView
 from app.admin.ck_text_area_field import CKTextAreaField
 from app.articles.models import Post
-from flask_admin.contrib.sqla import ModelView
 from flask_admin.model.template import macro
 from wtforms import validators
 # from flask_admin.form import SecureForm
@@ -8,7 +8,7 @@ from wtforms import validators
 def no_white_space(form, field):
   field.data = field.data.replace(' ', '-')
 
-class PostModelView(ModelView):
+class PostModelView(AuthView):
   form_overrides = {
     'content': CKTextAreaField
   }

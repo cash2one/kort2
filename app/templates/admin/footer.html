@@ -1,9 +1,5 @@
 <footer class="footer ">
   <div class="container">
-    {% if user %}
-      <p>You are logged in as: {{ user }}</p>
-    {% else %}
-      <p>You aren't logged in</p>
-    {% endif %}
+    <p>You are logged in as: {{ current_user.first_name }} {{ current_user.last_name }}. <a href="{{ url_for('security.logout')}}">Log out?</a></p>
   </div>
 </footer>
