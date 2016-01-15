@@ -7,7 +7,6 @@ from werkzeug import secure_filename
 import os
 
 @app.route('/admin/upload', methods=('GET', 'POST'))
-@roles_accepted('admin')
 def admin():
   file = request.files['upload']
   if file:
