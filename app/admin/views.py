@@ -23,7 +23,7 @@ def admin():
     file.save(path)
     response = {
       'uploaded': 1,
-      'url': '//files.nickkortendick.com/' + filename,
+      'url': 'http://files.nickkortendick.com/' + filename,
       'fileName' : filename
     }
     return jsonify(response), 201
