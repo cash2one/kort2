@@ -1,0 +1,26 @@
+{% from "macros/forms.html" import render_field %}
+{% extends "base_templates/base.html" %}
+  {% block main %}
+    <form method="POST" action="{{url_for('lights.index')}}">
+      <div>
+        {{ form.hidden_tag() }}
+        {{ form.light_one(class='color-picker') }}
+        {{ form.light_two(class='color-picker') }}
+        {{ form.light_three(class='color-picker') }}
+        {{ form.light_four(class='color-picker') }}
+        {{ form.light_five(class='color-picker') }}
+        {{ form.light_six(class='color-picker') }}
+        {{ form.light_seven(class='color-picker') }}
+      </div>
+      <hr>
+      {{ form.type }}
+      <br>
+      Delay:
+      {{ form.delay }}
+      <div class="form-group" style="padding-top:10px">
+         <div class="col-sm-offset-2 col-sm-10">
+          {{ form.submit(class="btn btn-primary") }}
+        </div>
+      </div>
+  </form>
+{% endblock %}

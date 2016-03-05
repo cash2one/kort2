@@ -23,6 +23,7 @@ from app.admin import views
 from app.articles import views
 from app.contact import views
 from app.dashboard import views
+from app.lights import views
 from app.pages import views
 
 from flask.ext.login import current_user
