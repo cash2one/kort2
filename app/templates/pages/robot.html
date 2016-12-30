@@ -1,6 +1,6 @@
 {% extends "base_templates/base.html" %}
   {% block main %}
-    <p>Hi! Do me a quick favor and verify that you aren't a robot. I promise you'll only have to do it once</p>
+    <p>Hi! Do me a quick favor and verify that you aren't a robot. We use cookies to make sure that you won't have to confirm it again.</p>
     <form method="POST" action="{{url_for('robot')}}">
       {{ form.hidden_tag() }}
       {{ form.redirect }}
